@@ -1,0 +1,27 @@
+{
+  "id": "x402:base:nft:0x92e556a704b49A0a4B099596423470a8426470AF",
+  "type": "nft_collection",
+  "name": "Codex402 TEST DO NOT USE",
+  "network": "base",
+  "contract": "0x92e556a704b49A0a4B099596423470a8426470AF",
+  "description": "Mint Codex402 NFT on Base for 1 USDC.",
+  "external_url": "https://opensea.io/assets/base/0x92e556a704b49A0a4B099596423470a8426470AF",
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/mint",
+      "description": "Mint a new NFT (requires 1 USDC approval)",
+      "parameters": [
+        { "name": "to", "type": "address", "required": true },
+        { "name": "tokenSuffix", "type": "string", "required": false, "default": "0.json" }
+      ],
+      "price": "1 USDC"
+    }
+  ],
+  "attributes": {
+    "protocol": "x402",
+    "category": "nft",
+    "payment_token": "USDC",
+    "creator": "0x73d46d0a83D7a21bA47eFD643Ab616Ea41cE3f77"
+  }
+}
