@@ -10,34 +10,40 @@ export default async function handler(req, res) {
   const PAY_TO = "0x73d46d0a83D7a21bA47eFD643Ab616Ea41cE3f77";
 
   if (req.method === "GET") {
-    return res.status(402).json({
-      x402Version: 1,
-      error: "Payment required: 1 USDC to mint Codex402 NFT.",
-      accepts: [{
-        scheme: "exact",                 
-        network: NETWORK,
-        resource: `https://basescan.org/address/${USDC}`,
-        maxAmountRequired: `${PRICE}`,
-        description: "Mint Codex402 NFT on Base for 1 USDC",
-        mimeType: "application/json",
-        payTo: PAY_TO,
-        maxTimeoutSeconds: 600,
-        asset: "USDC"
-      }],
-      outputSchema: {
-        input: {
-          type: "http",
-          method: "POST",
-          bodyType: "json",
-          bodyFields: {
-            to: { type: "string", required: true, description: "receiver address" },
-            suffix: { type: "string", required: false, default: "0.json" }
-          }
-        },
-        output: { txHash: "string", tokenId: "number", note: "string" }
-      }
-    });
-  }
+  const NETWORK = "base";
+  const USDC   = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
+  const PRICE  = 1_000_000; 
+  const PAY_TO = "0x73d46d0a83D7a21bA47eFD643Ab616Ea41cE3f77";
+
+  return res.status(402).json({
+    x402Version: 1,
+    error: "Payment required: 1 USDC to mint Codex402 NFT.",
+    accepts: [{
+      scheme: "exact",                                
+      network: NETWORK,
+      resource: `https://basescan.org/address/${USDC}`, 
+      maxAmountRequired: `${PRICE}`,
+      description: "Mint Codex402 NFT on Base for 1 USDC",
+      mimeType: "application/json",
+      payTo: PAY_TO,
+      maxTimeoutSeconds: 600,
+      asset: "USDC"
+    }],
+    outputSchema: {
+      input: {
+        type: "http",
+        method: "GET",
+        bodyType: "none",
+        queryParams: {
+          to:     { type: "string", required: false, description: "receiver address" },
+          suffix: { type: "string", required: false, default: "0.json" }
+        }
+      },
+      // Что вернёт успешный вызов (документация для UI)
+      output: { txHash: "string", tokenId: "number", note: "string" }
+    }
+  });
+}
 
   if (req.method === "POST") {
     const { to, suffix = "0.json" } = req.body || {};
