@@ -5,8 +5,8 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
 
   const NETWORK = "base";
-  const USDC   = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"; // USDC (Base)
-  const PRICE  = 1_000_000; // 1 USDC (6 знаков)
+  const USDC   = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"; 
+  const PRICE  = 1_000_000; 
   const PAY_TO = "0x73d46d0a83D7a21bA47eFD643Ab616Ea41cE3f77";
 
   if (req.method === "GET") {
@@ -14,9 +14,9 @@ export default async function handler(req, res) {
       x402Version: 1,
       error: "Payment required: 1 USDC to mint Codex402 NFT.",
       accepts: [{
-        scheme: "exact",                 // <-- БЫЛО schema, нужно scheme
+        scheme: "exact",                 
         network: NETWORK,
-        resource: `https://basescan.org/address/${USDC}`, // <-- валидный URL
+        resource: `https://basescan.org/address/${USDC}`,
         maxAmountRequired: `${PRICE}`,
         description: "Mint Codex402 NFT on Base for 1 USDC",
         mimeType: "application/json",
