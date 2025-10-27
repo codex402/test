@@ -1,0 +1,7 @@
+{
+  "name": "x402-mint-api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": { "start": "node api/mint.js" }
+}
